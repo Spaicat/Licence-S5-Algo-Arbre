@@ -185,7 +185,7 @@ void affichePrettyRec(Node*& node, int profondeur, bool isRight) {
     //Espace à mettre avant
     std::string textBefore = "";
     for (int i = 0; i < profondeur - 1; i++) {
-        textBefore += "      ";
+        textBefore += "        ";
     }
 
     //Droite
@@ -195,9 +195,9 @@ void affichePrettyRec(Node*& node, int profondeur, bool isRight) {
 
     //Racine
     if (profondeur != 0) {
-        textBefore += isRight ? "  ┌────" : "  └────";
+        textBefore += isRight ? "┌───────" : "└───────";
     }
-    std::cout << textBefore << node->toString() << std::endl;
+    std::cout << textBefore << "┤" << node->toString() << std::endl;
 
     //Gauche
     if (node->left != nullptr) {
