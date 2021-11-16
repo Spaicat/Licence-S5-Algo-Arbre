@@ -34,6 +34,6 @@ void Node::vide() {
 }
 
 std::string Node::toString() {
-    std::string colorString = (color == Color::Noire) ? "N" : "R";
-    return "<" + std::to_string(elt) + ", " + colorString + ">";
+    std::string colorString = (color == Color::Noire) ? " (N)" : " (R)";
+    return std::to_string(elt) + colorString;
 }
