@@ -8,8 +8,8 @@ enum class Color { Rouge, Noire };
 
 class Node
 {
-	friend class ARN;
 	friend class ABR;
+	friend class ARN;
 
 	public :
 		Node();
@@ -20,6 +20,7 @@ class Node
 		void vide();
 
 		std::string toString();
+		std::string toStringColor();
 
 	private:
 		Element elt;

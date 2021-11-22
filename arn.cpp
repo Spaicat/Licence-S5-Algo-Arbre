@@ -161,7 +161,7 @@ void ARN::affichePrettyRec(Node*& node, int profondeur, std::string textBefore, 
     //Racine
     std::cout << textBefore;
     if (profondeur != 0) std::cout << (isRight ? "┌───────" : "└───────");
-    std::cout << "┼" << node->toString() << std::endl;
+    std::cout << "┼" << node->toStringColor() << std::endl;
 
     //Gauche
     if (node->left != nullptr) {

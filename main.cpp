@@ -10,10 +10,15 @@ int main()
 	SetConsoleOutputCP(CP_UTF8); //Pour windows (utf8) A ENLEVER
 	std::printf("░░▒▒▓▓ Arbre Rouge Noir ▓▓▒▒░░\n");
 
-	Collection<ARN>* arn1 = new Collection<ARN>();
-	for (int i = 0; i < 20; i++) {
-		arn1->insere(i);
-	}
+	Collection<ABR>* arn1 = new Collection<ABR>();
+	arn1->insere(25);
+	arn1->insere(15);
+	arn1->insere(10);
+	arn1->insere(20);
+	arn1->insere(5);
+	arn1->insere(30);
+	arn1->insere(35);
+	arn1->insere(40);
 
 	std::printf("░░▒▒▓▓ Magnifique :\n");
 

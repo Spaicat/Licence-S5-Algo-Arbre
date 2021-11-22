@@ -31,27 +31,24 @@ ABR & ABR::operator = (const ABR & abr) {
 
 void ABR::insereRec(Node*& node, Element elt) {
 	if (elt < node->elt) {
-		if (node->left != nullptr) {
+		if (node->left != nullptr)
 			insereRec(node->left, elt);
-		}
 		else
-			node->left = new Node(elt, Color::Rouge);
+			node->left = new Node(elt);
 	}
 	else {
-		if (node->right != nullptr) {
+		if (node->right != nullptr)
 			insereRec(node->right, elt);
-		}
 		else
-			node->right = new Node(elt, Color::Rouge);
+			node->right = new Node(elt);
 	}
 }
 void ABR::insere(Element elt) {
 	if (root == nullptr) {
-		root = new Node(elt, Color::Noire);
+		root = new Node(elt);
 	}
 	else {
 		insereRec(root, elt);
-		root->color = Color::Noire;
 	}
 }
 
@@ -67,6 +64,7 @@ Node* ABR::recherche(Element elt) {
 
 	return curr;
 }
+
 void ABR::affichePrettyRec(Node*& node, int profondeur, std::string textBefore, bool isRight) {
 	std::string branch = "";
 
