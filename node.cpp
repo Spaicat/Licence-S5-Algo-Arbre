@@ -15,6 +15,12 @@ Node::Node(Node* nde) {
     if (nde->right != nullptr) right = new Node(nde->right);
 }
 
+Node::Node(Element elt) {
+    this->elt = elt;
+    this->left = nullptr;
+    this->right = nullptr;
+}
+
 Node::Node(Element elt, Color clr) {
     this->elt = elt;
     this->color = clr;

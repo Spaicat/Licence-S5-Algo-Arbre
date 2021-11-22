@@ -1,5 +1,6 @@
-﻿#include "arn.h"
+#include "arn.h"
 #include "node.h"
+#include "collection.h"
 #include <iostream>
 
 ARN::ARN() {
@@ -29,7 +30,7 @@ ARN & ARN::operator = (const ARN & abr) {
 }
 
 
-void rotationDroite(Node*& node) {
+void ARN::rotationDroite(Node*& node) {
     //On met de côté le sous-arbre gauche
     Node* temp = node->left;
     //On peut donc remplacer dans notre arbre le fils gauche par ce qu'on veut obtenir
@@ -41,7 +42,7 @@ void rotationDroite(Node*& node) {
     //On remplace donc dans notre arbre
     node = temp;
 }
-void rotationGauche(Node*& node) {
+void ARN::rotationGauche(Node*& node) {
     //On met de côté le sous-arbre droit
     Node* temp = node->right;
     //On peut donc remplacer dans notre arbre le fils droit par ce qu'on veut obtenir
@@ -53,7 +54,7 @@ void rotationGauche(Node*& node) {
     //On remplace donc dans notre arbre
     node = temp;
 }
-void equilibreGauche(Node*& node) {
+void ARN::equilibreGauche(Node*& node) {
     if (node->left != nullptr && node->left->color == Color::Rouge) {
         //Cas 1 : left->left possède un oncle (right) rouge
         if (node->right != nullptr && node->right->color == Color::Rouge) {
@@ -79,7 +80,7 @@ void equilibreGauche(Node*& node) {
         }
     }
 }
-void equilibreDroit(Node*& node) {
+void ARN::equilibreDroit(Node*& node) {
     if (node->right != nullptr && node->right->color == Color::Rouge) {
         //Cas 1 : right->right possède un oncle (left) rouge
         if (node->left != nullptr && node->left->color == Color::Rouge) {
@@ -105,7 +106,7 @@ void equilibreDroit(Node*& node) {
         }
     }
 }
-void insereRec(Node*& node, Element elt) {
+void ARN::insereRec(Node*& node, Element elt) {
     if (elt < node->elt) {
         if (node->left != nullptr) {
             insereRec(node->left, elt);
@@ -147,65 +148,30 @@ Node* ARN::recherche(Element elt) {
 	return curr;
 }
 
-
-void affichePrefixeRec(Node*& node) {
-    std::cout << node->toString();
-    if (node->left != nullptr) affichePrefixeRec(node->left);
-    if (node->right != nullptr) affichePrefixeRec(node->right);
-}
-void ARN::affichePrefixe() {
-	if (root != nullptr)
-		affichePrefixeRec(root);
-    std::cout << std::endl;
-}
-
-void afficheInfixeRec(Node*& node) {
-    if (node->left != nullptr) afficheInfixeRec(node->left);
-    std::cout << node->toString();
-    if (node->right != nullptr) afficheInfixeRec(node->right);
-}
-void ARN::afficheInfixe() {
-	if (root != nullptr)
-		afficheInfixeRec(root);
-    std::cout << std::endl;
-}
-
-void affichePostfixeRec(Node*& node) {
-    if (node->left != nullptr) affichePostfixeRec(node->left);
-    if (node->right != nullptr) affichePostfixeRec(node->right);
-    std::cout << node->toString();
-}
-void ARN::affichePostfixe() {
-	if (root != nullptr)
-		affichePostfixeRec(root);
-    std::cout << std::endl;
-}
-
-void affichePrettyRec(Node*& node, int profondeur, bool isRight) {
-    //Espace à mettre avant
-    std::string textBefore = "";
-    for (int i = 0; i < profondeur - 1; i++) {
-        textBefore += "        ";
-    }
+void ARN::affichePrettyRec(Node*& node, int profondeur, std::string textBefore, bool isRight) {
+    std::string branch = "";
 
     //Droite
     if (node->right != nullptr) {
-        affichePrettyRec(node->right, profondeur + 1, true);
+        if (profondeur != 0) branch = (!isRight ? "│       " : "        ");
+
+        affichePrettyRec(node->right, profondeur + 1, textBefore + branch, true);
     }
 
     //Racine
-    if (profondeur != 0) {
-        textBefore += isRight ? "┌───────" : "└───────";
-    }
-    std::cout << textBefore << "┤" << node->toString() << std::endl;
+    std::cout << textBefore;
+    if (profondeur != 0) std::cout << (isRight ? "┌───────" : "└───────");
+    std::cout << "┼" << node->toString() << std::endl;
 
     //Gauche
     if (node->left != nullptr) {
-        affichePrettyRec(node->left, profondeur + 1, false);
+        if (profondeur != 0) branch = (isRight ? "│       " : "        ");
+
+        affichePrettyRec(node->left, profondeur + 1, textBefore + branch, false);
     }
 }
 void ARN::affichePretty() {
-	if (root != nullptr)
-		affichePrettyRec(root, 0, false);
+    if (root != nullptr)
+        affichePrettyRec(root, 0, "", false);
     std::cout << std::endl;
 }

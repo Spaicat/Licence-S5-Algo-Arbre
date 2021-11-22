@@ -1,17 +1,18 @@
-#ifndef _ARN
-#define _ARN
+#ifndef _ABR
+#define _ABR
 #include "node.h"
 #include "element.h"
+#include "collection.h"
 
-class ARN
+class ABR
 {
 	public :
-		ARN();
-		ARN(const ARN& abr);
-		~ARN();
+		ABR();
+		ABR(const ABR & abr);
+		~ABR();
 		void vide();
 
-		ARN& operator = (const ARN& abr);
+		ABR & operator = (const ABR & abr);
 
 		void insere(Element elt);
 		Node* recherche(Element elt);
@@ -22,10 +23,6 @@ class ARN
 		Node* root;
 
 		void insereRec(Node*& node, Element elt);
-		void equilibreGauche(Node*& node);
-		void equilibreDroit(Node*& node);
-		void rotationGauche(Node*& node);
-		void rotationDroite(Node*& node);
 		void affichePrettyRec(Node*& node, int profondeur, std::string textBefore, bool isRight);
 };
 
