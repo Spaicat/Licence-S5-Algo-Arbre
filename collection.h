@@ -3,6 +3,6 @@
 #include "abr.h"
 #include "arn.h"
 
-typedef ARN Collection;
+typedef ABR Collection;
 
 #endif

@@ -9,7 +9,7 @@
 
 const int NB_TREE = 100;
 const int NB_ELT = 5000;
-const std::string NAME_FILE = "PerformanceARN";
+const std::string NAME_FILE = "PerformanceABR";
 
 int main()
 {
@@ -34,6 +34,7 @@ int main()
 	}
 
 	std::chrono::time_point<std::chrono::system_clock> start, end;
+	int perfInsertion = 0;
 	int perfTotal = 0;
 
 	//On crée le fichier excel
@@ -50,14 +51,16 @@ int main()
 		end = std::chrono::system_clock::now();
 
 		//Calcul de la moyenne d'une insertion dans un arbre
-		perfTotal = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count() / ArrayOftrees.size();
+		perfInsertion = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count() / ArrayOftrees.size();
+		perfTotal += perfInsertion;
 
-		filePerf << i << " " << perfTotal << "\n";
+		if (i%20 == 0) filePerf << i << " " << perfInsertion << "\n";
 	}
 	perfTotal /= NB_ELT;
 	filePerf.close();
 
 	std::cout << "▒ Fin de la compilation du fichier performance" << std::endl;
+	std::cout << "▒ Performances moyenne d'une insertion : " << perfTotal << " nanosecondes" << std::endl;
 
 	return 0;
 }
