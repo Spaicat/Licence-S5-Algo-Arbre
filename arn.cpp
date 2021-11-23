@@ -57,12 +57,11 @@ void ARN::rotationGauche(Node*& node) {
 void ARN::equilibreGauche(Node*& node) {
     if (node->left != nullptr && node->left->color == Color::Rouge) {
         //Cas 1 : left->left possède un oncle (right) rouge
-        if (node->right != nullptr && node->right->color == Color::Rouge) {
-            if (node->left->left != nullptr && node->left->left->color == Color::Rouge) {
+        if (node->right != nullptr && node->right->color == Color::Rouge
+            && node->left->left != nullptr && node->left->left->color == Color::Rouge) {
                 node->color = Color::Rouge;
                 node->left->color = Color::Noire;
                 node->right->color = Color::Noire;
-            }
         }
         //Cas 2 : left->left ne possède pas d'oncle (right) rouge
         //Cas 2.a : left->left est le fils gauche de left (rouge)
@@ -74,21 +73,18 @@ void ARN::equilibreGauche(Node*& node) {
         //Cas 2.b : left->right est le fils droit de left (rouge)
         else if (node->left->right != nullptr && node->left->right->color == Color::Rouge) {
             rotationGauche(node->left);
-            rotationDroite(node);
-            node->color = Color::Noire;
-            node->right->color = Color::Rouge;
+            equilibreGauche(node);
         }
     }
 }
 void ARN::equilibreDroit(Node*& node) {
     if (node->right != nullptr && node->right->color == Color::Rouge) {
         //Cas 1 : right->right possède un oncle (left) rouge
-        if (node->left != nullptr && node->left->color == Color::Rouge) {
-            if (node->right->right != nullptr && node->right->right->color == Color::Rouge) {
+        if (node->left != nullptr && node->left->color == Color::Rouge
+            && node->right->right != nullptr && node->right->right->color == Color::Rouge) {
                 node->color = Color::Rouge;
                 node->left->color = Color::Noire;
                 node->right->color = Color::Noire;
-            }
         }
         //Cas 2 : right->right ne possède pas d'oncle (left) rouge
         //Cas 2.a : right->right est le fils gauche de right (rouge)
@@ -99,10 +95,8 @@ void ARN::equilibreDroit(Node*& node) {
         }
         //Cas 2.b : right->left est le fils droit de right (rouge)
         else if (node->right->left != nullptr && node->right->left->color == Color::Rouge) {
-            rotationGauche(node->left);
-            rotationDroite(node);
-            node->color = Color::Noire;
-            node->left->color = Color::Rouge;
+            rotationDroite(node->right);
+            equilibreDroit(node);
         }
     }
 }

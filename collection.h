@@ -1,7 +1,8 @@
 #ifndef _COLLECTION
 #define _COLLECTION
+#include "abr.h"
+#include "arn.h"
 
-template<typename T>
-using Collection = T;
+typedef ARN Collection;
 
 #endif

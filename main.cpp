@@ -1,5 +1,7 @@
 #include <cstdio>
 #include <iostream>
+#include <vector>
+#include <chrono>
 #include "collection.h"
 #include "abr.h"
 #include "arn.h"
@@ -10,19 +12,13 @@ int main()
 	SetConsoleOutputCP(CP_UTF8); //Pour windows (utf8) A ENLEVER
 	std::printf("░░▒▒▓▓ Arbre Rouge Noir ▓▓▒▒░░\n");
 
-	Collection<ABR>* arn1 = new Collection<ABR>();
-	arn1->insere(25);
-	arn1->insere(15);
-	arn1->insere(10);
-	arn1->insere(20);
-	arn1->insere(5);
-	arn1->insere(30);
-	arn1->insere(35);
-	arn1->insere(40);
+	std::vector<Collection> ArrayOftrees;
+	for (int i = 0; i < 100; i++) {
+		Collection tree = Collection();
+		ArrayOftrees.push_back(tree);
+	}
 
 	std::printf("░░▒▒▓▓ Magnifique :\n");
-
-	arn1->affichePretty();
 
 	std::printf("░░▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒░░\n");
 

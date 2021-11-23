@@ -9,10 +9,17 @@ Node::Node() {
 }
 
 Node::Node(Node* nde) {
-    this->elt = nde->elt;
-    this->color = nde->color;
-    if (nde->left != nullptr) left = new Node(nde->left);
-    if (nde->right != nullptr) right = new Node(nde->right);
+    if (nde != nullptr) {
+        this->elt = nde->elt;
+        this->color = nde->color;
+        if (nde->left != nullptr) left = new Node(nde->left);
+        if (nde->right != nullptr) right = new Node(nde->right);
+    }
+    else {
+        this->color = Color::Noire;
+        this->left = nullptr;
+        this->right = nullptr;
+    }
 }
 
 Node::Node(Element elt) {
@@ -44,6 +51,6 @@ std::string Node::toString() {
 }
 
 std::string Node::toStringColor() {
-    std::string colorString = (color == Color::Noire) ? " (N)" : " (R)";
-    return std::to_string(elt) + colorString;
+    std::string colorString = (color == Color::Noire) ? "\033[1;40m" : "\033[1;41m";
+    return colorString + std::to_string(elt) + "\033[0m";
 }
