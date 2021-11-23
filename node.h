@@ -16,7 +16,7 @@ class Node
 		Node(Node* nde);
 		Node(Element elt);
 		Node(Element elt, Color clr);
-		~Node();
+		//~Node();
 		void vide();
 
 		std::string toString();

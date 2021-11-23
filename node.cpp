@@ -35,10 +35,10 @@ Node::Node(Element elt, Color clr) {
     this->right = nullptr;
 }
 
-Node::~Node() {
+/*Node::~Node() {
     vide();
     delete this;
-}
+}*/
 
 void Node::vide() {
     if (left != nullptr) left->vide();

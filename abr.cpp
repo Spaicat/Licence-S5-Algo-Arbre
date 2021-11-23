@@ -18,7 +18,7 @@ ABR::~ABR() {
 void ABR::vide() {
     if (root != nullptr)
         root->vide();
-    root = nullptr;
+	root = nullptr;
 }
 
 ABR & ABR::operator = (const ABR & abr) {
