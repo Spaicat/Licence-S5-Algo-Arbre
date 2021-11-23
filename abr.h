@@ -2,7 +2,6 @@
 #define _ABR
 #include "node.h"
 #include "element.h"
-#include "collection.h"
 
 class ABR
 {
@@ -22,6 +21,7 @@ class ABR
 	private:
 		Node* root;
 
+		Node* rechercheRec(Element e, Node* n);
 		void insereRec(Node*& node, Element elt);
 		void affichePrettyRec(Node*& node, int profondeur, std::string textBefore, bool isRight);
 };

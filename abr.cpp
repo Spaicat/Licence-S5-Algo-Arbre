@@ -1,6 +1,5 @@
 ﻿#include "abr.h"
 #include "node.h"
-#include "collection.h"
 #include <iostream>
 
 ABR::ABR() {
@@ -52,17 +51,20 @@ void ABR::insere(Element elt) {
 	}
 }
 
-Node* ABR::recherche(Element elt) {
-	Node* curr = root;
-
-	while(curr != nullptr && curr->elt != elt) {
-		if (elt < curr->elt)
-			curr = curr->left;
-		else
-			curr = curr->right;
+Node* ABR::rechercheRec(Element e, Node* n)
+{
+	if (n != nullptr)
+	{
+		if (e == n->elt) return n;
+		else if (e < n->elt) return rechercheRec(e, n->left);
+		else return rechercheRec(e, n->right);
 	}
+	return n;
+}
 
-	return curr;
+Node* ABR::recherche(Element e) {
+	Node* elem = rechercheRec(e, root);
+	return elem;
 }
 
 void ABR::affichePrettyRec(Node*& node, int profondeur, std::string textBefore, bool isRight) {

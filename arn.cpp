@@ -1,6 +1,4 @@
 #include "arn.h"
-#include "node.h"
-#include "collection.h"
 #include <iostream>
 
 ARN::ARN() {
@@ -129,17 +127,22 @@ void ARN::insere(Element elt) {
 }
 
 
-Node* ARN::recherche(Element elt) {
-	Node* curr = root;
+Node* ARN::rechercheRec(Element e, Node* n)
+{
+    if (n != nullptr) {
+        if (e == n->elt)
+            return n;
+        else if (e < n->elt)
+            return rechercheRec(e, n->left);
+        else
+            return rechercheRec(e, n->right);
+    }
+    return n;
+}
 
-	while(curr != nullptr && curr->elt != elt) {
-		if (elt < curr->elt)
-			curr = curr->left;
-		else
-			curr = curr->right;
-	}
-
-	return curr;
+Node* ARN::recherche(Element e) {
+    Node* elem = rechercheRec(e, root);
+    return elem;
 }
 
 void ARN::affichePrettyRec(Node*& node, int profondeur, std::string textBefore, bool isRight) {

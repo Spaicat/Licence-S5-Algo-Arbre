@@ -21,6 +21,7 @@ class ARN
 	private:
 		Node* root;
 
+		Node* rechercheRec(Element e, Node* n);
 		void insereRec(Node*& node, Element elt);
 		void equilibreGauche(Node*& node);
 		void equilibreDroit(Node*& node);
