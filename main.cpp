@@ -9,7 +9,7 @@
 
 const int NB_TREE = 100;
 const int NB_ELT = 5000;
-const std::string NAME_FILE = "PerformanceABR";
+const std::string NAME_FILE = "PerformanceARN";
 
 int main()
 {
